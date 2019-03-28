@@ -4,3 +4,6 @@ class Item:
         self.itemType = itemType
         self.value = value
         self.description = description
+
+    def __repr__(self):
+        return f'Item: {self.name}'
