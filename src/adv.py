@@ -39,7 +39,7 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
 # Add items to rooms
-room['foyer'].addItem(item['sword'])
+room['foyer'].add_item(item['sword'])
 
 #
 # Main
@@ -83,6 +83,7 @@ def parse_command(command):
             if player.room.check_item(item[noun]):
                 player.pickup_item(item[noun])
                 print(f'You {verb} {noun}')
+        elif verb == 'drop':
 
 
 def list_items():

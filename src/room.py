@@ -13,7 +13,7 @@ class Room:
         self.items = []
         self.available_directions = None
 
-    def addItem(self, item):
+    def add_item(self, item):
         """Add and item to the room.
 
         Arguments:
