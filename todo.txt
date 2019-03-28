@@ -62,5 +62,5 @@
 // TODO Implement support for the verb `drop` followed by an `Item` name. This is the
   opposite of `get`/`take`.
 
-// TODO Add the `i` and `inventory` commands that both show a list of items currently
+// DONE Add the `i` and `inventory` commands that both show a list of items currently
   carried by the player.

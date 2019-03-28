@@ -52,6 +52,7 @@ directions = ['north', 'east', 'south', 'west']
 movement_verbs = ['go', 'walk']
 interaction_verbs = ['open', 'close']
 item_interaction_verbs = ['pickup', 'grab', 'take', 'get']
+misc_commands = ['i', 'inventory']
 
 
 def parse_command(command):
@@ -65,6 +66,11 @@ def parse_command(command):
         elif split_command[0] == 'quit':
             global running
             running = False
+        elif split_command[0] in misc_commands:
+            if split_command[0] == 'i' or split_command[0] == 'inventory':
+                inventory = player.get_item_names()
+                stringified_list = '\n'.join(inventory)
+                print(f"Your inventory contains:\n{stringified_list}")
         else:
             print('Invalid command')
     else:
@@ -84,7 +90,8 @@ def list_items():
     if player.room.items:
         items = player.room.get_item_names()
         stringified_list = '\n'.join(items)
-        print(f"In the room you see the following items: \n{stringified_list}")
+        print(
+            f"In the room you see the following items: \n{stringified_list}\n")
 
 
 def process_input():

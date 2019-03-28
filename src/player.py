@@ -30,6 +30,12 @@ class Player:
         self.room.remove_item(item)
         item.on_take(self)
 
+    def get_item_names(self):
+        working = []
+        for i in self.inventory:
+            working.append(i.name)
+        return working
+
     def move(self, direction):
         self.room.get_available_directions()
         if direction in self.room.available_directions:
