@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 import types
 
 # Declare all the rooms
@@ -23,7 +24,9 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
-
+item = {
+    'sword': Item("Sword", "A nice shiny sword", "weapon", "10")
+}
 # Link rooms together
 
 room['outside'].n_to = room['foyer']
@@ -35,6 +38,9 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Add items to rooms
+room['foyer'].addItem(item['sword'])
+
 #
 # Main
 #
@@ -43,6 +49,9 @@ player = Player(room=room['outside'])
 
 # Make a new player object that is currently in the 'outside' room.
 directions = ['north', 'east', 'south', 'west']
+movement_verbs = ['go', 'walk']
+interaction_verbs = ['open', 'close']
+item_interaction_verbs = ['pickup', 'grab', 'take', 'get']
 
 
 def parse_command(command):
@@ -53,14 +62,28 @@ def parse_command(command):
     elif len(split_command) == 1:
         if split_command[0] in directions:
             player.move(split_command[0])
+        elif split_command[0] == 'quit':
+            global running
+            running = False
         else:
             print('Invalid command')
+    else:
+        verb = split_command[0]
+        noun = split_command[1]
+
+        if verb in movement_verbs:
+            player.move(noun)
+        elif verb in item_interaction_verbs:
+            if player.room.check_item(item[noun]):
+                player.pickup_item(item[noun])
+                print(f'You {verb} {noun}')
 
 
 def list_items():
     """List all items available in room."""
-    if not player.room.items:
-        stringified_list = '\n'.join(player.room.items)
+    if player.room.items:
+        items = player.room.get_item_names()
+        stringified_list = '\n'.join(items)
         print(f"In the room you see the following items: \n{stringified_list}")
 
 

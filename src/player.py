@@ -19,15 +19,20 @@ class Player:
             'west': self.room.w_to
         }
 
-    def addItem(self, item):
+    def add_item(self, item):
         self.inventory.append(item)
 
-    def setRoom(self, room):
+    def set_room(self, room):
         self.room = room
+
+    def pickup_item(self, item):
+        self.add_item(item)
+        self.room.remove_item(item)
+        item.on_take(self)
 
     def move(self, direction):
         self.room.get_available_directions()
         if direction in self.room.available_directions:
-            self.setRoom(self.directions[direction])
+            self.set_room(self.directions[direction])
         else:
             print("That's not possible try again.")

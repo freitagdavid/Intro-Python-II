@@ -23,39 +23,39 @@
   also be a `list` of items "in" the player, similar to how `Item`s can be in a
   `Room`.
 
-// TODO Add a new type of sentence the parser can understand: two words.
+// DONE Add a new type of sentence the parser can understand: two words.
 
-  // TODO Until now, the parser could just understand one sentence form:
+  // DONE Until now, the parser could just understand one sentence form:
 
      `verb`
 
     such as "n" or "q".
 
-  // TODO But now we want to add the form:
+  // DONE But now we want to add the form:
 
     `verb` `object`
 
     such as "take coins" or "drop sword".
 
-  // TODO Split the entered command and see if it has 1 or 2 words in it to determine
+  // DONE Split the entered command and see if it has 1 or 2 words in it to determine
     if it's the first or second form.
 
-// TODO Implement support for the verb `get` followed by an `Item` name. This will be
+// DONE Implement support for the verb `get` followed by an `Item` name. This will be
   used to pick up `Item`s.
 
-  // TODO If the user enters `get` or `take` followed by an `Item` name, look at the
+  // DONE If the user enters `get` or `take` followed by an `Item` name, look at the
     contents of the current `Room` to see if the item is there.
 
-     // TODO If it is there, remove it from the `Room` contents, and add it to the
+     // DONE If it is there, remove it from the `Room` contents, and add it to the
        `Player` contents.
 
-     // TODO If it's not there, print an error message telling the user so.
+     // DONE If it's not there, print an error message telling the user so.
 
-     // TODO Add an `on_take` method to `Item`. 
+     // DONE Add an `on_take` method to `Item`. 
 
-        // TODO Call this method when the `Item` is picked up by the player.
+        // DONE Call this method when the `Item` is picked up by the player.
 
-        // TODO The `Item` can use this to run additional code when it is picked up.
+        // DONE The `Item` can use this to run additional code when it is picked up.
 
      // TODO Add an `on_drop` method to `Item`. Implement it similar to `on_take`.
 

@@ -14,7 +14,24 @@ class Room:
         self.available_directions = None
 
     def addItem(self, item):
+        """Add and item to the room.
+
+        Arguments:
+            item {[object]} -- [item instance]
+        """
         self.items.append(item)
+
+    def remove_item(self, item):
+        self.items.remove(item)
+
+    def check_item(self, item):
+        return item in self.items
+
+    def get_item_names(self):
+        working = []
+        for i in self.items:
+            working.append(i.name)
+        return working
 
     def get_available_directions(self):
         working_list = []
