@@ -30,8 +30,14 @@ class Player:
         self.room.remove_item(item)
         item.on_take(self)
 
+# \\ Todo: Test
+
     def remove_item(self, item):
         self.inventory.remove(item)
+
+# \\ Todo: Test and finish it off
+#    It should remove the items from the players inventory then add it to the room
+#    the player is currently in
 
     def drop_item(self, item):
         if item in self.inventory:
