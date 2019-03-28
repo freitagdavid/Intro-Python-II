@@ -42,64 +42,45 @@ room['treasure'].s_to = room['narrow']
 player = Player(room=room['outside'])
 
 # Make a new player object that is currently in the 'outside' room.
-
-
-def get_verb(command):
-    if 'go' in split_list or 'walk' in split_list:
-        return 'move'
-    if 'pickup' in split_list or 'grab' in split_list or 'take' in split_list:
+directions = ['north', 'east', 'south', 'west']
 
 
 def parse_command(command):
-    split_list = command.lower().split()
-    print(split_list)
-    # split_list = list(map(lambda x: x.lower(), split_list))
+    split_command = command.lower().split()
 
-    if 'north' in split_list:
-        if player.room.n_to is None:
-            print("That's not possible try again.")
+    if len(split_command) > 2:
+        print('You can enter at most two words.')
+    elif len(split_command) == 1:
+        if split_command[0] in directions:
+            player.move(split_command[0])
         else:
-            player.setRoom(player.room.n_to)
-    if 'east' in split_list:
-        if player.room.n_to is None:
-            print("That's not possible try again.")
-        else:
-            player.setRoom(player.room.e_to)
-    if 'south' in split_list:
-        if player.room.n_to is None:
-            print("That's not possible try again.")
-        else:
-            player.setRoom(player.room.s_to)
-    if 'west' in split_list:
-        if player.room.n_to is None:
-            print("That's not possible try again.")
-        else:
-            player.setRoom(player.room.w_to)
-    if 'quit' in split_list:
-        confirmation = input('Are you sure you want to quit: ').lower()
-        if confirmation == 'yes':
-            global running
-            running = False
-        else:
-            return
+            print('Invalid command')
 
 
 def list_items():
-    if len(player.room.items) != 0:
+    """List all items available in room."""
+    if not player.room.items:
         stringified_list = '\n'.join(player.room.items)
         print(f"In the room you see the following items: \n{stringified_list}")
 
 
 def process_input():
+    """Intake input and pass it to the parser."""
     player_input = input('What do you wish to do?: ')
     parse_command(player_input)
 
 
 def update():
-    return
+    """
+    General cleaning up.
+
+    Happens after handling commands and before updating screen.
+    """
+    player.map_directions()
 
 
 def draw():
+    """Handle all data output to screen."""
     print(player.room.name)
     print(player.room.description)
     list_items()
