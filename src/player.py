@@ -30,6 +30,14 @@ class Player:
         self.room.remove_item(item)
         item.on_take(self)
 
+    def remove_item(self, item):
+        self.inventory.remove(item)
+
+    def drop_item(self, item):
+        if item in self.inventory:
+            self.remove_item(item)
+            self.room.add_
+
     def get_item_names(self):
         working = []
         for i in self.inventory:
